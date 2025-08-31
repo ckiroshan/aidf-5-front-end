@@ -1,8 +1,7 @@
 function User(props) {
   return (
     <>
-      <h1 className="text-red-500 text-3xl md:text-6xl">{props.name}</h1>
-      <p>{props.age ?? 27}</p>
+      <button className="bg-black text-white p-2" onClick={props.onClick}>Click</button>
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Menu, Globe, X } from "lucide-react";
 import { Link } from "react-router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,12 +23,20 @@ function Navigation() {
         <Button variant="ghost" size="sm" className="text-xs hidden md:flex">
           <Globe className="h-4 w-4 mr-2" /> EN
         </Button>
-        <Button variant="ghost" size="sm" asChild className="text-xs hidden md:flex">
-          <Link to="/sign-in">Log In</Link>
-        </Button>
-        <Button size="sm" asChild className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex">
-          <Link to="/sign-up">Sign Up</Link>
-        </Button>
+        <SignedOut>
+          <Button variant="ghost" size="sm" asChild className="text-xs hidden md:flex">
+            <Link to="/sign-in">Log In</Link>
+          </Button>
+          <Button size="sm" asChild className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex">
+            <Link to="/sign-up">Sign Up</Link>
+          </Button>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+          <Button size="sm" asChild className="bg-white text-black hover:bg-gray-200 text-xs hidden md:flex">
+            <Link to="/account">My Account</Link>
+          </Button>
+        </SignedIn>
 
         {/* Mobile Menu Button */}
         <div className="relative md:hidden">

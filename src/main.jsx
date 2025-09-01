@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import HomePage from "./pages/home.page.jsx";
 import SignInPage from "./pages/sign-in.page.jsx";
 import SignUpPage from "./pages/sign-up.page.jsx";
@@ -10,20 +10,24 @@ import HotelDetailsPage from "./pages/hotel-details.page.jsx";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import './index.css'
+import { Provider } from "react-redux";
+import { store } from "./lib/store.js";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RootLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/hotels" element={<HotelsPage />} />
-          <Route path="/hotels/:_id" element={<HotelDetailsPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
-)
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/hotels" element={<HotelsPage />} />
+            <Route path="/hotels/:_id" element={<HotelDetailsPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);

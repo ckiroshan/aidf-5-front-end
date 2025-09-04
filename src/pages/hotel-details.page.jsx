@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
+import { MapPin, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { Wifi } from "lucide-react";
@@ -9,11 +9,25 @@ import { Tv } from "lucide-react";
 import { Coffee } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton.jsx";
-import { useGetHotelByIdQuery } from "@/lib/api.js";
+import { useAddReviewMutation, useGetHotelByIdQuery } from "@/lib/api.js";
+import { useUser } from "@clerk/clerk-react";
 
 const HotelDetailsPage = () => {
   const { _id } = useParams();
   const { data: hotel, isLoading, isError, error } = useGetHotelByIdQuery(_id);
+  const [addReview, { isLoading: isAddReviewLoading }] = useAddReviewMutation();
+
+  const { user } = useUser();
+
+  const handleAddReview = async () => {
+    try {
+      await addReview({
+        hotelId: _id,
+        comment: "This is a test review",
+        rating: 5,
+      }).unwrap();
+    } catch (error) {}
+  };
 
   if (isLoading) {
     return (
@@ -133,6 +147,9 @@ const HotelDetailsPage = () => {
               <p className="text-2xl font-bold">${hotel.price}</p>
               <p className="text-sm text-muted-foreground">per night</p>
             </div>
+            <Button disabled={isAddReviewLoading} className={`${isAddReviewLoading ? "opacity-50" : ""}`} onClick={handleAddReview}>
+              <PlusCircle className="w-4 h-4" /> Add Review
+            </Button>
           </div>
         </div>
       </div>

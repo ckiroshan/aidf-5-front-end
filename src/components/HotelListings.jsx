@@ -1,12 +1,8 @@
 import HotelCard from "@/components/HotelCard";
-import { hotels, locations } from "@/data";
 import { useState } from "react";
 import LocationTab from "./LocationTab";
-import { useGetAllHotelsQuery, useGetAllLocationsQuery, useAddLocationMutation } from "@/lib/api";
+import { useGetAllHotelsQuery, useGetAllLocationsQuery } from "@/lib/api";
 import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
-import { PlusCircle } from "lucide-react";
-import { toast } from "sonner";
 
 function HotelListings() {
   const [selectedLocation, setSelectedLocation] = useState(0);
@@ -14,8 +10,6 @@ function HotelListings() {
   const { data: hotels, isLoading: isHotelsLoading, isError: isHotelsError, error: hotelsError } = useGetAllHotelsQuery();
 
   const { data: locations, isLoading: isLocationsLoading, isError: isLocationsError, error: locationsError } = useGetAllLocationsQuery();
-
-  const [addLocation, { isLoading: isAddLocationLoading, isError: isAddLocationError, error: addLocationError }] = useAddLocationMutation();
 
   const allLocations = locations ? [{ _id: 0, name: "All" }, ...locations] : [{ _id: 0, name: "All" }];
 
@@ -35,16 +29,6 @@ function HotelListings() {
   const isLoading = isHotelsLoading || isLocationsLoading;
   const isError = isHotelsError || isLocationsError;
   const error = [hotelsError, locationsError];
-
-  const handleAddLocation = async () => {
-    try {
-      toast.loading("Adding location...");
-      await addLocation({ name: "Fiji" }).unwrap();
-      toast.success("Location added successfully");
-    } catch (error) {
-      toast.error("Failed to add location");
-    }
-  };
 
   if (isLoading) {
     return (
@@ -81,13 +65,6 @@ function HotelListings() {
           Discover the most trending hotels worldwide for an unforgettable
           experience.
         </p>
-        <Button
-          disabled={isAddLocationLoading}
-          className={`${isAddLocationLoading ? "opacity-50" : ""}`}
-          onClick={handleAddLocation}
-        >
-          <PlusCircle className="w-4 h-4" /> Add Location
-        </Button>
       </div>
 
       <div className="flex items-center flex-wrap gap-x-4">

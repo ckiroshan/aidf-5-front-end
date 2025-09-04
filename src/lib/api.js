@@ -38,6 +38,14 @@ export const api = createApi({
         },
       }),
     }),
+    // Add Review
+    addReview: build.mutation({
+      query: (review) => ({
+        url: "reviews",
+        method: "POST",
+        body: review,
+      }),
+    }),
     // Get all locations
     getAllLocations: build.query({
       query: () => "locations",
@@ -47,4 +55,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useAddLocationMutation, useGetAllLocationsQuery } = api;
+export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useAddLocationMutation, useGetAllLocationsQuery, useAddReviewMutation } = api;

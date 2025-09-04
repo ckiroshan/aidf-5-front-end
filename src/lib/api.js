@@ -28,6 +28,14 @@ export const api = createApi({
     getHotelById: build.query({
       query: (id) => `hotels/${id}`,
     }),
+    // Add Hotel
+    createHotel: build.mutation({
+      query: (hotel) => ({
+        url: "hotels",
+        method: "POST",
+        body: hotel,
+      }),
+    }),
     // Add location
     addLocation: build.mutation({
       query: (location) => ({
@@ -55,4 +63,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useAddLocationMutation, useGetAllLocationsQuery, useAddReviewMutation } = api;
+export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useCreateHotelMutation, useAddLocationMutation, useGetAllLocationsQuery, useAddReviewMutation } = api;

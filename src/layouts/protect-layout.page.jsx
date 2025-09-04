@@ -9,8 +9,6 @@ const ProtectLayout = () => {
 
   if (isLoaded && !isSignedIn) return <Navigate to="/sign-in" />;
 
-  console.log(user);
-
   return <Outlet />;
 };
 

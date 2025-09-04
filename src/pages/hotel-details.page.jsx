@@ -1,12 +1,7 @@
 import { useParams } from "react-router";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, PlusCircle } from "lucide-react";
+import { MapPin, PlusCircle, Star, Wifi, Building2, Tv, Coffee  } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { Wifi } from "lucide-react";
-import { Building2 } from "lucide-react";
-import { Tv } from "lucide-react";
-import { Coffee } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton.jsx";
 import { useAddReviewMutation, useGetHotelByIdQuery } from "@/lib/api.js";

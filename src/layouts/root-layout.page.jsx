@@ -1,6 +1,7 @@
-import Navigation from "../Navigation";
+import Navigation from "@/components/Navigation";
+import { Toaster } from "@/components/ui/sonner";
 import { Outlet } from "react-router";
-import { Toaster } from "../ui/sonner";
+
 
 function RootLayout() {
   return (

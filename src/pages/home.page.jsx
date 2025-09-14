@@ -1,5 +1,5 @@
+import HotelsView from "@/components/HotelsView";
 import Hero from "../components/Hero";
-import HotelListings from "../components/HotelListings";
 
 function HomePage() {
   return (
@@ -7,7 +7,7 @@ function HomePage() {
       <div className="relative min-h-[85vh]">
         <Hero />
       </div>
-      <HotelListings />
+      <HotelsView />
     </main>
   );
 }

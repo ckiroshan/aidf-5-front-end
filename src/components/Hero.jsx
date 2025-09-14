@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import AISearch from "./AISearch";
 
 const heroImages = [
   "https://cf.bstatic.com/xdata/images/hotel/max1280x900/297840629.jpg?k=d20e005d5404a7bea91cb5fe624842f72b27867139c5d65700ab7f69396026ce&o=&hp=1",
@@ -62,28 +63,12 @@ export default function Hero() {
       ))}
 
       {/* Hero Content */}
-      <div className="relative flex flex-col items-center text-white justify-center h-full px-4 sm:px-8 z-0">
+      <div className="relative z-10 flex flex-col items-center text-white justify-center h-full px-4 sm:px-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">Find Your Best Staycation</h1>
         <p className="text-base md:text-lg mb-8 text-center max-w-2xl">Describe your dream destination and experience, and we'll find the perfect place for you.</p>
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="w-full max-w-md">
-          <div className="relative flex items-center">
-            <div className="relative flex-grow">
-              <Input
-                type="text"
-                name="search"
-                placeholder="Search..." // Short placeholder for mobile
-                className="bg-[#1a1a1a] text-sm sm:text-base text-white placeholder:text-white/70 placeholder:text-sm sm:placeholder:text-base sm:placeholder:content-['Describe_your_destination...'] border-0 rounded-full py-6 pl-4 pr-12 sm:pr-32 w-full transition-all"
-              />
-            </div>
-
-            <button type="submit" className="absolute right-2 h-[80%] my-auto bg-black text-white rounded-full px-2 sm:px-4 flex items-center gap-x-2 border-white border-2 hover:bg-white/10 transition-colors">
-              <Sparkles className="w-4 h-4 fill-white" />
-              <span className="text-sm">AI Search</span>
-            </button>
-          </div>
-        </form>
+        <AISearch />
 
         {/* Pagination dots */}
         <div className="absolute bottom-6 flex space-x-3">

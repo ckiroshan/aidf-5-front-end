@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api/",
+    baseUrl: `${BACKEND_URL}/api/`,
     prepareHeaders: async (headers) => {
       return new Promise((resolve) => {
         async function checkToken() {
@@ -46,6 +48,30 @@ export const api = createApi({
       }),
       invalidatesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
     }),
+    // Add Booking
+    createBooking: build.mutation({
+      query: (booking) => ({
+        url: "bookings",
+        method: "POST",
+        body: booking,
+      }),
+    }),
+    // Get Booking by ID
+    getBookingById: build.query({
+      query: (bookingId) => `bookings/${bookingId}`,
+    }),
+    // Add Checkout session
+    createCheckoutSession: build.mutation({
+      query: (payload) => ({
+        url: `payments/create-checkout-session`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
+    // Get Checkout session status
+    getCheckoutSessionStatus: build.query({
+      query: (sessionId) => `payments/session-status?session_id=${sessionId}`,
+    }),
     // Get all locations
     getAllLocations: build.query({
       query: () => "locations",
@@ -76,4 +102,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useAddLocationMutation, useGetAllLocationsQuery, useAddReviewMutation } = api;
+export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useCreateBookingMutation, useGetBookingByIdQuery, useCreateCheckoutSessionMutation, useGetCheckoutSessionStatusQuery, useAddLocationMutation, useGetAllLocationsQuery, useAddReviewMutation } = api;

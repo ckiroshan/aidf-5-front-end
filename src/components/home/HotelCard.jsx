@@ -1,24 +1,7 @@
 import { MapPin, Star } from "lucide-react";
-import { Button } from "./ui/button";
-import { useState } from "react";
 import { Link } from "react-router";
 
 function HotelCard(props) {
-  // let num = 1;
-  //   const handleClick = () => {
-  //     console.log("I was clicked")
-  //     console.log("Inside handleclick", num)
-  //     num = num + 1;
-  //   }
-  //   console.log("Outside handleclick", num)
-//   const [num, setNum] = useState(0);
-
-//   const handleClick = () => {
-//     setNum(5);
-//     console.log(num);
-//     console.log("Hey");
-//   };
-
   return (
     <Link to={`/hotels/${props.hotel._id}`} className="block group relative">
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl">

@@ -1,5 +1,5 @@
-import HotelsView from "@/components/HotelsView";
-import Hero from "../components/Hero";
+import Hero from "@/components/home/Hero";
+import HotelsView from "@/components/home/HotelsView";
 
 function HomePage() {
   return (

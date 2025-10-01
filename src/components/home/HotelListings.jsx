@@ -1,8 +1,9 @@
-import HotelCard from "@/components/HotelCard";
+
 import { useState } from "react";
 import LocationTab from "./LocationTab";
 import { useGetAllHotelsQuery, useGetAllLocationsQuery } from "@/lib/api";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
+import HotelCard from "./HotelCard";
 
 function HotelListings() {
   const [selectedLocation, setSelectedLocation] = useState(0);

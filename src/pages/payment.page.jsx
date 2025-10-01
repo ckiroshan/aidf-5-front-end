@@ -1,4 +1,4 @@
-import CheckoutForm from "@/components/CheckoutForm";
+import CheckoutForm from "@/components/hotel-details/CheckoutForm";
 import { useSearchParams } from "react-router";
 import { useGetBookingByIdQuery } from "@/lib/api";
 
@@ -15,7 +15,9 @@ function PaymentPage() {
 
   return (
     <main className="container mx-auto px-4 py-8 min-h-screen">
-      <h2 className="text-4xl font-bold">Review Your Booking</h2>
+      <span className="text-center">
+        <h1 className="text-2xl lg:text-4xl font-bold">Confirm Your Booking</h1>
+      </span>
       <div className="mt-4">
         <CheckoutForm bookingId={booking._id} />
       </div>

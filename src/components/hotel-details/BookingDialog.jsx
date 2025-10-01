@@ -16,12 +16,12 @@ export function BookingDialog({ hotelName, hotelId, onSubmit, isLoading }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg">Book Now</Button>
+        <Button className="px-5 text-lg">Book Now</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] border-3 border-primary">
         <DialogHeader>
-          <DialogTitle>Book Your Stay</DialogTitle>
-          <DialogDescription>Complete the form below to book your stay at {hotelName}.</DialogDescription>
+          <DialogTitle className="text-center">Book Your Stay</DialogTitle>
+          <DialogDescription className="text-center">Complete the form below to book your stay at {hotelName}.</DialogDescription>
         </DialogHeader>
         <BookingForm onSubmit={handleBookingSubmit} isLoading={isLoading} hotelId={hotelId} />
       </DialogContent>

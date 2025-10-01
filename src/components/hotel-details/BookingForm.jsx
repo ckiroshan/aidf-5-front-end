@@ -63,7 +63,7 @@ export default function BookingForm({ onSubmit, isLoading, hotelId }) {
           )}
         />
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Booking..." : "Book Now"}
+          {isLoading ? "Submitting..." : "Submit Check-in"}
         </Button>
       </form>
     </Form>

@@ -18,6 +18,7 @@ import AdminProtectLayout from "./layouts/admin-protect-layout.page.jsx";
 import CreateHotelPage from "./pages/create-hotel.page.jsx";
 import PaymentPage from "./pages/payment.page.jsx";
 import CompletePage from "./pages/complete.page.jsx";
+import { AccountDashboard } from "./pages/account-dashboard.page.jsx";
 
 const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 if (!clerkPublishableKey) {
@@ -39,6 +40,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/hotels/:_id" element={<HotelDetailsPage />} />
                 <Route path="/booking/payment" element={<PaymentPage />} />
                 <Route path="/booking/complete" element={<CompletePage />} />
+                <Route path="/my-account" element={<AccountDashboard />} />
                 <Route element={<AdminProtectLayout />}>
                   <Route path="/admin/create-hotel" element={<CreateHotelPage />} />
                 </Route>

@@ -60,6 +60,11 @@ export const api = createApi({
     getBookingById: build.query({
       query: (bookingId) => `bookings/${bookingId}`,
     }),
+    // Get Bookings for a User
+    getBookingsForUser: build.query({
+      query: (userId) => `bookings/user/${userId}`,
+      providesTags: (result, error, userId) => [{ type: "Bookings", id: userId }],
+    }),
     // Add Checkout session
     createCheckoutSession: build.mutation({
       query: (payload) => ({
@@ -107,4 +112,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useCreateBookingMutation, useGetBookingByIdQuery, useCreateCheckoutSessionMutation, useGetCheckoutSessionStatusQuery, useAddLocationMutation, useGetAllLocationsQuery, useGetReviewsByHotelQuery, useAddReviewMutation } = api;
+export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useCreateBookingMutation, useGetBookingByIdQuery, useGetBookingsForUserQuery, useCreateCheckoutSessionMutation, useGetCheckoutSessionStatusQuery, useAddLocationMutation, useGetAllLocationsQuery, useGetReviewsByHotelQuery, useAddReviewMutation } = api;

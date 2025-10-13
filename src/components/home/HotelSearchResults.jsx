@@ -1,7 +1,7 @@
 import { useGetHotelsBySearchQuery } from "@/lib/api";
 import { useSelector } from "react-redux";
 import { Skeleton } from "../ui/skeleton";
-import HotelCard from "./HotelCard";
+import { HotelCard } from "../hotels/HotelCard";
 
 function HotelListings() {
   const query = useSelector((state) => state.search.query);

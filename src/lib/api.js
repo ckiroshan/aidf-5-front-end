@@ -26,7 +26,7 @@ export const api = createApi({
   endpoints: (build) => ({
     // Get all hotels
     getAllHotels: build.query({
-      query: () => "hotels",
+      query: () => "hotels/all",
       providesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
     }),
     // Get hotels by search
@@ -47,6 +47,20 @@ export const api = createApi({
         body: hotel,
       }),
       invalidatesTags: (result, error, id) => [{ type: "Hotels", id: "LIST" }],
+    }),
+    getHotelsFiltered: build.query({
+      query: ({ locations = [], minPrice, maxPrice, sortBy, page = 1, pageSize = 12 }) => {
+        const params = new URLSearchParams();
+        if (locations.length) params.set("locations", locations.join("|"));
+        if (minPrice != null) params.set("minPrice", String(minPrice));
+        if (maxPrice != null) params.set("maxPrice", String(maxPrice));
+        if (sortBy) params.set("sortBy", sortBy);
+        params.set("page", String(page));
+        params.set("pageSize", String(pageSize));
+        return `hotels?${params.toString()}`;
+      },
+      // optional tags for refetch on mutations
+      providesTags: (result) => [{ type: "Hotels", id: "FILTERED_LIST" }],
     }),
     // Add Booking
     createBooking: build.mutation({
@@ -82,6 +96,9 @@ export const api = createApi({
       query: () => "locations",
       providesTags: (result, error, id) => [{ type: "Locations", id: "LIST" }],
     }),
+    getLocationNames: build.query({
+      query: () => `locations/names`, // or `locations` if you return name list
+    }),
     // Add location
     addLocation: build.mutation({
       query: (location) => ({
@@ -112,4 +129,4 @@ export const api = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useCreateBookingMutation, useGetBookingByIdQuery, useGetBookingsForUserQuery, useCreateCheckoutSessionMutation, useGetCheckoutSessionStatusQuery, useAddLocationMutation, useGetAllLocationsQuery, useGetReviewsByHotelQuery, useAddReviewMutation } = api;
+export const { useGetAllHotelsQuery, useGetHotelByIdQuery, useGetHotelsBySearchQuery,useCreateHotelMutation, useCreateBookingMutation, useGetBookingByIdQuery, useGetBookingsForUserQuery, useCreateCheckoutSessionMutation, useGetCheckoutSessionStatusQuery, useAddLocationMutation, useGetAllLocationsQuery, useGetReviewsByHotelQuery, useAddReviewMutation, useGetHotelsFilteredQuery, useGetLocationNamesQuery } = api;

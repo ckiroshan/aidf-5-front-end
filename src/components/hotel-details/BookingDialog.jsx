@@ -2,21 +2,32 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from "@/components/ui/button";
 import BookingForm from "./BookingForm";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useCreateBookingMutation } from "@/lib/api";
 
-export function BookingDialog({ hotelName, hotelId, onSubmit, isLoading }) {
+export function BookingDialog({ hotelName, hotelId }) {
   const [open, setOpen] = useState(false);
+  const [createBooking, { isLoading }] = useCreateBookingMutation();
+  const navigate = useNavigate();
 
   const handleBookingSubmit = async (bookingData) => {
-    await onSubmit(bookingData);
-    if (!isLoading) {
-      setTimeout(() => setOpen(false), 300);
+    try {
+      const result = await createBooking({
+        hotelId,
+        checkIn: bookingData.checkIn,
+        checkOut: bookingData.checkOut,
+      }).unwrap();
+      navigate(`/booking/payment?bookingId=${result._id}`);
+      setOpen(false);
+    } catch (err) {
+      console.error("Booking failed", err);
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="px-5 text-lg">Book Now</Button>
+        <Button className="px-5">Book Now</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border-3 border-primary">
         <DialogHeader>

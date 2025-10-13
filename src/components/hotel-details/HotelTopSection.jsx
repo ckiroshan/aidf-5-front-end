@@ -1,28 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Star, MapPin, Eye } from "lucide-react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { BookingDialog } from "./BookingDialog";
-import { useCreateBookingMutation } from "@/lib/api";
 import { useState } from "react";
 import { Dialog, DialogContent } from "../ui/dialog";
 
 export const HotelTopSection = ({ hotel, isLoading }) => {
   const { _id } = useParams();
-  const [createBooking, { isLoading: isCreateBookingLoading }] = useCreateBookingMutation();
   const [isImageOpen, setIsImageOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const handleBook = async (bookingData) => {
-    try {
-      const result = await createBooking({
-        hotelId: _id,
-        checkIn: bookingData.checkIn,
-        checkOut: bookingData.checkOut,
-      }).unwrap();
-      navigate(`/booking/payment?bookingId=${result._id}`);
-    } catch (error) {}
-  };
 
   if (isLoading) {
     return (
@@ -82,7 +68,7 @@ export const HotelTopSection = ({ hotel, isLoading }) => {
             <p className="text-2xl font-bold">${hotel.price}</p>
             <p className="text-md font-semibold">per night</p>
           </div>
-          <BookingDialog hotelName={hotel.name} hotelId={hotel._id} onSubmit={handleBook} isLoading={isCreateBookingLoading} />
+          <BookingDialog hotelName={hotel.name} hotelId={hotel._id} />
         </div>
       </div>
 

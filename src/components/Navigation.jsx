@@ -2,13 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Menu, Globe, X } from "lucide-react";
 import { Link } from "react-router";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // const count = useSelector((state) => state.counter);
   
   return (
     <nav className="z-50 bg-primary backdrop-blur-md flex items-center justify-between px-4 sm:px-6 text-white py-3 rounded-full mx-4 my-3 relative">
@@ -16,6 +13,9 @@ function Navigation() {
         <Link to="/" className="text-xl font-bold">Horizone</Link>
         <div className="hidden md:flex space-x-6">
           <Link to={`/`} className="transition-colors text-sm">Home</Link>
+        </div>
+        <div className="hidden md:flex space-x-6">
+          <Link to={`/hotels`} className="transition-colors text-sm">Hotels</Link>
         </div>
       </div>
 

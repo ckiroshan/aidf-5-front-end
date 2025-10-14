@@ -1,26 +1,17 @@
-function LocationTab(props) {
-  const handleClick = () => {
-    props.onClick(props.location);
-  };
-
-  if (props.location._id === props.selectedLocation) {
-    return (
-      <div
-        className="text-base bg-gray-200 border rounded-full px-2 py-1 cursor-pointer"
-        onClick={handleClick}
-      >
-        {props.location.name}
-      </div>
-    );
-  }
+function LocationTab({ location, selectedLocation, onClick }) {
+  const isActive = location._id === selectedLocation;
 
   return (
-    <div
-      className="text-base  border rounded-full px-2 py-1 cursor-pointer"
-      onClick={handleClick}
+    <button
+      onClick={() => onClick(location)}
+      className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors border
+        ${isActive 
+          ? "bg-primary text-white shadow-sm" 
+          : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
+        }`}
     >
-      {props.location.name}
-    </div>
+      {location.name}
+    </button>
   );
 }
 

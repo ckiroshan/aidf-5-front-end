@@ -12,7 +12,7 @@ export const BookingCard = ({ booking }) => {
   const { hotelId: hotel } = booking;
 
   return (
-    <div className="overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted shadow-md hover:shadow-lg transition">
+    <div className="overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted shadow-md hover:shadow-lg transition mb-3">
       {/* Image */}
       <div className="relative group">
         <img src={hotel.image} alt={hotel.name} className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
@@ -25,24 +25,28 @@ export const BookingCard = ({ booking }) => {
 
       {/* Content */}
       <div className="p-5 space-y-2">
-        <h3 className="text-xl font-bold text-foreground">{hotel.name}</h3>
+        <h3 className="text-lg font-semibold text-foreground">{hotel.name}</h3>
         <div className="flex flex-wrap items-center">
           <MapPin className="h-5 w-5 text-amber-500 mr-1" />
-            <span className="text-muted-foreground mr-3">{hotel.location}</span>
+            <span className="text-sm text-muted-foreground mr-3">{hotel.location}</span>
         </div>
 
         <div className="text space-y-1">
           <p>
-            <span className="font-semibold">Check-in:</span> {safeFormat(booking.checkIn, "MMM d, yyyy")}
+            <span className="text-sm font-semibold">Check-in → </span>
+             {safeFormat(booking.checkIn, "MMM d, yyyy")}
           </p>
           <p>
-            <span className="font-semibold">Check-out:</span> {safeFormat(booking.checkOut, "MMM d, yyyy")}
+            <span className="text-sm font-semibold">Check-out → </span>
+             {safeFormat(booking.checkOut, "MMM d, yyyy")}
           </p>
           <p>
-            <span className="font-semibold">Room No:</span> {booking.roomNumber}
+            <span className="text-sm font-semibold">Room No : </span>
+             {booking.roomNumber}
           </p>
           <p> 
-            <span className="font-semibold">Booked on </span>{safeFormat(booking.createdAt, "MMM d, yyyy h:mm a")}
+            <span className="text-sm font-semibold">Booked on : </span>
+            {safeFormat(booking.createdAt, "MMM d, yyyy h:mm a")}
             </p>
         </div>
       </div>

@@ -1,18 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
-import { Input } from "@/components/ui/input";
-import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import AISearch from "./AISearch";
 
 const heroImages = [
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/297840629.jpg?k=d20e005d5404a7bea91cb5fe624842f72b27867139c5d65700ab7f69396026ce&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/596257607.jpg?k=0b513d8fca0734c02a83d558cbad7f792ef3ac900fd42c7d783f31ab94b4062c&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/308797093.jpg?k=3a35a30f15d40ced28afacf4b6ae81ea597a43c90c274194a08738f6e760b596&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/84555265.jpg?k=ce7c3c699dc591b8fbac1a329b5f57247cfa4d13f809c718069f948a4df78b54&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/608273980.jpg?k=c7df20ffb25ae52b6a17037dc13f5e15b94a0fe253a9b9d0b656f6376eabec7d&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/606303798.jpg?k=514943d0025704b27396faf82af167468d8b50b98f311668f206f79ca36cb53d&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/60307464.jpg?k=67ae35316203e2ec82d8e02e0cef883217cce9c436da581528b94ad6dee8e393&o=&hp=1",
-  "https://cf.bstatic.com/xdata/images/hotel/max1280x900/308794596.jpg?k=76bbd047a4f3773844efb15819a637f10fb98671244760fcd69cf26d1073b797&o=&hp=1",
+  "https://drive.google.com/thumbnail?id=1VWB4BI4124_T9eZvQ8XMhq0dG2oNkhtp&sz=w2000",
+  "https://drive.google.com/thumbnail?id=1aEVNEMtcF3v-qL90sE7Em2fpw9waXBFq&sz=w2000",
+  "https://drive.google.com/thumbnail?id=19G3vh08_3Po29UQNa5X6dBvK0tG3dhcH&sz=w2000",
+  "https://drive.google.com/thumbnail?id=1MtqK-7ggbOkxDRdXDj4nQnWz7OfD4sFi&sz=w2000",
+  "https://drive.google.com/thumbnail?id=1iNd_BCSikdZvMnWgrXs2B_YK8_k8s8Wy&sz=w2000",
+  "https://drive.google.com/thumbnail?id=15NN2jglLnvw8EW8qEALCrFixAyvyzDAM&sz=w2000",
+  "https://drive.google.com/thumbnail?id=1Aaf12acvoavRHcwOJHGxcjYTX7f1tT2K&sz=w2000",
+  "https://drive.google.com/thumbnail?id=1IvsztZsgptwTBsuvMqkaqdJkTUqhPNbA&sz=w2000",
 ];
 
 export default function Hero() {
@@ -54,17 +52,17 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative h-[500px] md:h-[600px] py-3 mx-4 overflow-hidden rounded-3xl bg-black z-0">
+    <div className="relative h-[630px] md:h-[640px] lg:h-[650px] py-3 mx-4 overflow-hidden rounded-3xl bg-black z-0">
       {/* Background Images */}
       {heroImages.map((image, index) => (
         <div key={index} className={cn("absolute inset-0 bg-cover bg-center transition-opacity duration-500", currentSlide === index ? "opacity-100" : "opacity-0")} style={{ backgroundImage: `url(${image})` }}>
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
         </div>
       ))}
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center text-white justify-center h-full px-4 sm:px-8">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">Find Your Best Staycation</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">Find Your Best Staycation</h1>
         <p className="text-base md:text-lg mb-8 text-center max-w-2xl">Describe your dream destination and experience, and we'll find the perfect place for you.</p>
 
         {/* Search Form */}

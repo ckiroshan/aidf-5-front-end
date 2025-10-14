@@ -3,6 +3,8 @@ import { BookingCard } from "./BookingCard";
 import { useState } from "react";
 import { AppPagination } from "../AppPagination";
 import { Skeleton } from "../ui/skeleton";
+import { Button } from "../ui/button";
+import { CalendarSearch } from "lucide-react";
 
 export const BookingHistory = ({ userId }) => {
   const { data: bookings = [], isLoading, isError } = useGetBookingsForUserQuery(userId);
@@ -12,7 +14,6 @@ export const BookingHistory = ({ userId }) => {
   if (isLoading) {
     return (
       <section>
-        <h2 className="text-2xl font-bold mb-4">My Booking History</h2>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="overflow-hidden rounded-xl border bg-card shadow-sm">
@@ -39,12 +40,8 @@ export const BookingHistory = ({ userId }) => {
       </section>
     );
   }
-  
-  if (isError) return <p className="text-destructive">Failed to load bookings.</p>;
 
-  if (bookings.length === 0) {
-    return <p className="text-muted-foreground">You have no bookings yet.</p>;
-  }
+  if (isError) return <p className="text-destructive">Failed to load bookings.</p>;
 
   const totalPages = Math.ceil(bookings.length / pageSize);
   const startIndex = (page - 1) * pageSize;
@@ -52,7 +49,18 @@ export const BookingHistory = ({ userId }) => {
 
   return (
     <section>
-      <h2 className="text-2xl font-bold mb-4">My Booking History</h2>
+      {bookings.length === 0 && (
+        <section className="flex flex-col items-center justify-center py-6 text-center border-2 rounded-2xl mb-5">
+          <div className="rounded-full bg-muted p-4 mb-6 border-2">
+            <CalendarSearch className="text-primary" />
+          </div>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">No bookings yet</h2>
+          <p className="text-sm md:text-base text-muted-foreground mb-6 w-100 md:max-w-md">Looks like you haven’t booked your stay yet. Start exploring our hotels and plan your next getaway today.</p>
+          <Button asChild>
+            <a href="/hotels">Browse Hotels</a>
+          </Button>
+        </section>
+      )}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
         {currentBookings.map((booking) => (
           <BookingCard key={booking._id} booking={booking} />
